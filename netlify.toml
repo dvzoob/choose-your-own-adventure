@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Netlify Configuration
 # Configures the build settings and Netlify Functions environment
 
@@ -21,16 +20,3 @@
   from = "/*"
   to = "/index.html"
   status = 200
-=======
-[build]
-  command = "npm run build"
-  functions = "netlify/functions"
-  publish = "dist"
-
-[dev]
-  command = "npm run dev"
-  port = 5173
-
-[functions]
-  node_bundler = "esbuild"
->>>>>>> person-b-frontend
