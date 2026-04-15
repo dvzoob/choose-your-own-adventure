@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ACCESSIBILITY, ROUTES } from '../constants'
 
 /**
@@ -18,22 +18,47 @@ export default function Header() {
       </a>
 
       <nav
-        className="bg-white shadow"
+        className="sticky top-0 z-40 bg-base-100/95 backdrop-blur-xl border-b border-slate-200/60 shadow-sm"
         aria-label={ACCESSIBILITY.NAVIGATION_LABEL}
       >
-        <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <button
-            onClick={() => navigate(ROUTES.HOME)}
-            className="text-2xl font-bold text-indigo-600 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded px-2"
-            aria-label="CYOA Maker - Go to home"
-          >
-            🎭 CYOA Maker
-          </button>
+        <div className="navbar max-w-6xl mx-auto px-4 sm:px-6 py-4">
+          <div className="navbar-start">
+            <button
+              onClick={() => navigate(ROUTES.HOME)}
+              className="btn btn-ghost btn-lg normal-case text-2xl lg:text-3xl font-bold text-slate-950 px-2"
+              aria-label="CYOA Maker - Go to home"
+            >
+              🎭 CYOA Maker
+            </button>
+          </div>
 
-          <div className="flex gap-4">
+          <div className="navbar-center hidden lg:flex">
+            <div className="menu menu-horizontal px-1 gap-2">
+              <Link
+                to="/"
+                className="btn btn-ghost btn-sm lg:px-4 lg:py-3 lg:text-base"
+              >
+                Home
+              </Link>
+              <Link
+                to="/author"
+                className="btn btn-ghost btn-sm lg:px-4 lg:py-3 lg:text-base"
+              >
+                Create Story
+              </Link>
+              <Link
+                to="/"
+                className="btn btn-ghost btn-sm lg:px-4 lg:py-3 lg:text-base"
+              >
+                Browse Stories
+              </Link>
+            </div>
+          </div>
+
+          <div className="navbar-end">
             <button
               onClick={() => navigate(ROUTES.AUTHOR)}
-              className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition font-semibold"
+              className="btn btn-primary btn-lg lg:px-8 lg:py-4 lg:text-lg xl:px-10 xl:py-5"
               aria-label="Create a new story"
             >
               ✍️ Create Story
