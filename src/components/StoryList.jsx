@@ -108,13 +108,13 @@ export default function StoryList() {
           return (
             <article
               key={story.id}
-              className="bg-gradient-to-br from-white via-purple-50 to-blue-50 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col h-full border-2 border-purple-200 p-6 items-center justify-center text-center group transform hover:scale-105 hover:-translate-y-2"
+              className="bg-gradient-to-br from-white via-purple-50 to-blue-50 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col border-2 border-purple-200 p-6 items-center justify-center text-center group"
             >
-              <div className="relative">
+              <div className="relative flex-shrink-0">
                 <img
                   src={imgUrl}
                   alt="Story cover"
-                  className="rounded-2xl shadow-lg w-28 h-28 object-cover mb-3 mx-auto border-2 border-purple-300 transition-transform duration-300 ease-in-out group-hover:scale-110"
+                  className="rounded-2xl shadow-lg w-28 h-28 object-cover mb-3 mx-auto border-2 border-purple-300 transition-transform duration-300 ease-in-out"
                 />
               </div>
               <h3 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 w-full mb-1">{story.title}</h3>
@@ -138,7 +138,7 @@ export default function StoryList() {
               </div>
               <button
                 onClick={() => navigate(`/read/${story.id}`)}
-                className="w-72 max-w-full px-12 py-8 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-full text-3xl shadow-lg hover:shadow-2xl hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-purple-400 focus:ring-offset-2 font-black transition-all duration-300 text-center mb-3 transform hover:scale-110 hover:-translate-y-1"
+                className="w-full px-8 py-6 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-full text-2xl shadow-lg hover:shadow-2xl hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-purple-400 focus:ring-offset-2 font-black transition-all duration-300 text-center mb-3"
                 aria-label={`Read story: ${story.title}`}
               >
                 📖 Read
@@ -148,7 +148,7 @@ export default function StoryList() {
                   // TODO: Implement edit functionality
                   alert('Edit coming soon!')
                 }}
-                className="w-72 max-w-full px-12 py-8 bg-gradient-to-r from-gray-300 to-gray-400 text-gray-800 rounded-full text-3xl shadow-lg hover:shadow-2xl hover:from-gray-400 hover:to-gray-500 focus:outline-none focus:ring-4 focus:ring-gray-300 focus:ring-offset-2 font-black transition-all duration-300 text-center transform hover:scale-110 hover:-translate-y-1"
+                className="w-full px-8 py-6 bg-gradient-to-r from-gray-300 to-gray-400 text-gray-800 rounded-full text-2xl shadow-lg hover:shadow-2xl hover:from-gray-400 hover:to-gray-500 focus:outline-none focus:ring-4 focus:ring-gray-300 focus:ring-offset-2 font-black transition-all duration-300 text-center"
                 aria-label={`Edit story: ${story.title}`}
                 disabled
               >

@@ -48,9 +48,7 @@
     padding: 0;
     font-family: 'Inter', system-ui, 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.6;
-    background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
-    background-size: 400% 400%;
-    animation: gradientWave 15s ease infinite;
+    background: white;
     min-height: 100vh;
   }
 
