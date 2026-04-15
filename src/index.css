@@ -4,6 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  button {
+    @apply transition duration-300;
+  }
+
+  button:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+}
+
 /* Accessibility utilities */
 .sr-only {
   position: absolute;
@@ -28,7 +38,6 @@
   white-space: normal;
 }
 
-/* Wave gradient animation */
 @keyframes gradientWave {
   0% {
     background-position: 0% 50%;
@@ -41,15 +50,63 @@
   }
 }
 
-/* Ensure all text has sufficient line-height for readability */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatSoft {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
 @layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', system-ui, 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.6;
-    background: white;
+    color: #0f172a;
+    background-color: #f8fafc;
+    background-image:
+      radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.08), transparent 18%),
+      radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.06), transparent 16%),
+      radial-gradient(circle at 50% 85%, rgba(14, 165, 233, 0.05), transparent 20%);
     min-height: 100vh;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.08), transparent 18%),
+      radial-gradient(circle at 80% 15%, rgba(168, 85, 247, 0.06), transparent 18%),
+      radial-gradient(circle at 50% 85%, rgba(251, 191, 36, 0.04), transparent 25%);
+    opacity: 0.8;
+    z-index: -1;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -57,29 +114,103 @@
     font-weight: 700;
   }
 
-  /* Ensure focus indicators are visible */
   :focus-visible {
-    outline: 2px solid #667eea;
+    outline: 2px solid #2563eb;
     outline-offset: 2px;
   }
 
-  button:focus-visible {
-    outline-offset: 2px;
-  }
-
-  a:focus-visible {
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
     outline-offset: 2px;
   }
 
   input:focus-visible,
   textarea:focus-visible,
   select:focus-visible {
-    outline: 2px solid #4f46e5;
-    outline-offset: 2px;
+    outline: 2px solid #2563eb;
   }
 }
 
-/* Reduced motion support */
+@layer components {
+  .glass-card {
+    border-radius: 2rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 28px 60px rgba(15, 23, 42, 0.08);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+  }
+
+  .glass-panel {
+    border-radius: 28px;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 24px 50px rgba(15, 23, 42, 0.07);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+  }
+
+  .soft-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 18px 40px rgba(37, 99, 235, 0.16);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  }
+
+  .soft-button:hover {
+    background: linear-gradient(90deg, #1d4ed8 0%, #2563eb 100%);
+    transform: translateY(-1px);
+  }
+
+  .soft-button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+  }
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fadeInUp 0.9s ease-out both;
+  }
+
+  .animate-soft-float {
+    animation: floatSoft 8s ease-in-out infinite;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 30px rgba(99, 102, 241, 0.32);
+  }
+
+  .prose {
+    color: #0f172a;
+  }
+
+  .prose p {
+    margin: 0;
+    color: #334155;
+    line-height: 1.85;
+  }
+
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    color: #0f172a;
+  }
+
+  .prose a {
+    color: #2563eb;
+    text-decoration: underline;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -89,7 +220,9 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}/* Line clamp utility for text overflow */
+}
+
+/* Line clamp utility for text overflow */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;

@@ -179,10 +179,12 @@ export default function Read() {
 
   if (loading) {
     return (
-      <div className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 min-h-screen flex flex-col">
+      <div className="bg-slate-50 min-h-screen flex flex-col text-slate-900">
         <Header />
-        <main className="flex-grow flex items-center justify-center">
-          <LoadingSpinner label="Loading your adventure..." />
+        <main className="flex-grow flex items-center justify-center px-4">
+          <div className="max-w-6xl mx-auto w-full">
+            <LoadingSpinner label="Loading your adventure..." />
+          </div>
         </main>
       </div>
     )
@@ -190,15 +192,17 @@ export default function Read() {
 
   if (error || !story) {
     return (
-      <div className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 min-h-screen flex flex-col">
+      <div className="bg-slate-50 min-h-screen flex flex-col text-slate-900">
         <Header />
         <main className="flex-grow flex items-center justify-center px-4">
-          <div className="max-w-md w-full">
-            <ErrorMessage
-              error={error || 'Story not found'}
-              onRetry={() => window.location.reload()}
-              onDismiss={() => navigate('/')}
-            />
+          <div className="max-w-6xl mx-auto w-full">
+            <div className="max-w-md mx-auto">
+              <ErrorMessage
+                error={error || 'Story not found'}
+                onRetry={() => window.location.reload()}
+                onDismiss={() => navigate('/')}
+              />
+            </div>
           </div>
         </main>
       </div>
@@ -209,22 +213,22 @@ export default function Read() {
   const totalPages = story.pages?.length || 0
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 flex flex-col">
+    <div className="min-h-screen bg-slate-50 flex flex-col text-slate-900">
       <Header />
       <main id={ACCESSIBILITY.MAIN_CONTENT_ID} className="flex-grow">
-        <div className="max-w-3xl mx-auto px-4 py-8">
+        <div className="max-w-6xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
           <Breadcrumbs items={[
             { label: 'Home', href: '/' },
             { label: story.title }
           ]} />
 
-          <div ref={contentRef} className="mt-8 bg-gradient-to-br from-white via-purple-50 to-blue-50 rounded-2xl shadow-2xl p-10 border-2 border-purple-200" role="main">
-            <header className="mb-10 pb-8 border-b-2 border-purple-300">
-              <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 mb-3">{story.title}</h1>
-              <p className="text-lg text-gray-700">by <span className="font-bold text-purple-600">{story.author}</span></p>
-              <div className="mt-6 flex items-center justify-between text-base text-gray-600 font-semibold">
+          <div ref={contentRef} className="mt-8 rounded-[2rem] border border-slate-200 bg-white p-10 shadow-xl max-w-4xl mx-auto" role="main">
+            <header className="mb-10 pb-8 border-b border-slate-800">
+              <h1 className="text-5xl font-black text-white mb-3">{story.title}</h1>
+              <p className="text-lg text-slate-300">by <span className="font-bold text-purple-300">{story.author}</span></p>
+              <div className="mt-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between text-base text-slate-300 font-semibold">
                 <span>Page {currentPage} of {totalPages}</span>
-                <div className="w-48 h-3 bg-gray-200 rounded-full overflow-hidden border-2 border-purple-300">
+                <div className="w-full md:w-48 h-3 bg-slate-800 rounded-full overflow-hidden border border-slate-700">
                   <div className="h-full bg-gradient-to-r from-purple-500 to-indigo-500 transition-all duration-500" style={{ width: `${(currentPage / totalPages) * 100}%` }} aria-hidden="true" />
                 </div>
               </div>
@@ -233,57 +237,59 @@ export default function Read() {
             {page ? (
               <>
                 {/* Decision page image */}
-                <div className="flex justify-center mb-8 w-full">
-                  <img
-                    src={
-                      story.id === '1'
-                        ? 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80'
-                        : story.id === '2'
-                        ? 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80'
-                        : story.id === '3'
-                        ? 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=400&q=80'
-                        : 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80'
-                    }
-                    alt="Scene illustration"
-                    className="rounded-2xl shadow-xl w-full max-w-md h-64 object-cover border-4 border-purple-300 transition-transform duration-300"
-                  />
+                <div className="flex justify-center mb-8">
+                  <div className="w-full max-w-3xl overflow-hidden rounded-[2rem] border-2 border-slate-200 shadow-lg transition-transform duration-300 hover:-translate-y-0.5">
+                    <img
+                      src={
+                        story.id === '1'
+                          ? 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80'
+                          : story.id === '2'
+                          ? 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80'
+                          : story.id === '3'
+                          ? 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=400&q=80'
+                          : 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80'
+                      }
+                      alt="Scene illustration"
+                      className="w-full h-72 sm:h-80 md:h-[28rem] object-cover"
+                    />
+                  </div>
                 </div>
 
                 <article className="prose prose-sm max-w-none mb-10">
-                  <p className="text-xl text-gray-800 leading-relaxed whitespace-pre-wrap font-medium">{page.content}</p>
+                  <p className="text-xl text-slate-900 leading-relaxed whitespace-pre-wrap font-medium">{page.content}</p>
                 </article>
 
                 {page.choices && page.choices.length > 0 ? (
-                  <section className="mt-8 w-full flex flex-col items-center">
-                    <h2 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 uppercase tracking-wide text-center mb-6">What do you do?</h2>
-                    <div className="flex flex-col gap-4 w-full max-w-2xl" role="group" aria-label="Story choices">
+                  <section className="mt-8 flex flex-col items-center">
+                    <h2 className="text-2xl font-black text-slate-900 uppercase tracking-wide text-center mb-6">What do you do?</h2>
+                    <div className="flex flex-col gap-4 max-w-2xl" role="group" aria-label="Story choices">
                       {page.choices.map((choice, idx) => (
                         <button
                           key={idx}
                           data-choice-button
                           onClick={() => handlePageChange(choice.next)}
-                          className="w-full px-8 py-4 text-center bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-full text-xl shadow-lg hover:shadow-2xl hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-purple-400 focus:ring-offset-2 font-bold transition-all duration-300 group border-2 border-purple-400"
+                          className="btn btn-primary btn-lg text-xl lg:px-8 lg:py-4 lg:text-2xl xl:px-10 xl:py-5"
                           aria-label={`Choice: ${choice.text}`}
                         >
                           <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→ {choice.text}</span>
                         </button>
                       ))}
                     </div>
-                    <p className="text-base text-gray-700 mt-6 font-semibold">💡 Use arrow keys (↑ ↓) to navigate choices</p>
+                    <p className="text-base text-slate-300 mt-6 font-semibold">💡 Use arrow keys (↑ ↓) to navigate choices</p>
                   </section>
                 ) : (
-                  <section className="mt-8 text-center py-12 bg-gradient-to-br from-purple-100 via-indigo-100 to-blue-100 rounded-2xl border-4 border-purple-300">
-                    <h2 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 mb-4">✨ The End ✨</h2>
-                    <p className="text-gray-800 mb-8 text-lg font-semibold">Thanks for reading <span className="font-black">{story.title}</span>!</p>
+                  <section className="mt-8 text-center py-12 bg-slate-50 rounded-2xl border border-slate-200 shadow-sm">
+                    <h2 className="text-5xl font-black text-slate-900 mb-4">✨ The End ✨</h2>
+                    <p className="text-slate-600 mb-8 text-lg font-semibold">Thanks for reading <span className="font-black text-slate-900">{story.title}</span>!</p>
                     <div className="flex gap-6 justify-center flex-wrap">
-                      <button onClick={() => navigate('/')} className="px-10 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-full text-xl font-black shadow-lg hover:shadow-2xl hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-purple-400 focus:ring-offset-2 transition-all duration-300 border-2 border-purple-400">← Back to Stories</button>
-                      <button onClick={() => setCurrentPage(1)} className="px-10 py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-full text-xl font-black shadow-lg hover:shadow-2xl hover:from-green-600 hover:to-emerald-600 focus:outline-none focus:ring-4 focus:ring-green-400 focus:ring-offset-2 transition-all duration-300 border-2 border-green-400">🔄 Start Over</button>
+                      <button onClick={() => navigate('/')} className="btn btn-secondary lg:px-6 lg:py-3 lg:text-lg xl:px-8 xl:py-4">← Back to Stories</button>
+                      <button onClick={() => setCurrentPage(1)} className="btn btn-success lg:px-6 lg:py-3 lg:text-lg xl:px-8 xl:py-4">🔄 Start Over</button>
                     </div>
                   </section>
                 )}
               </>
             ) : (
-              <div className="text-center py-12"><p className="text-white text-lg font-semibold">Page not found</p></div>
+              <div className="text-center py-12"><p className="text-slate-700 text-lg font-semibold">Page not found</p></div>
             )}
           </div>
         </div>

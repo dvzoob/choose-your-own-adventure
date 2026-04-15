@@ -4,6 +4,8 @@ import { useStories } from '../services/hooks'
 import LoadingSpinner from './LoadingSpinner'
 import ErrorMessage from './ErrorMessage'
 
+const STORY_CARD_MAX_WIDTH = '50vw'
+
 export default function StoryList() {
   const navigate = useNavigate()
   const { stories, loading, error, setStories } = useStories()
@@ -81,21 +83,21 @@ export default function StoryList() {
   }
 
   return (
-    <div>
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-800">
-          Featured Stories ({stories.length})
-        </h2>
-        <button
-          onClick={loadStories}
-          className="text-indigo-600 hover:text-indigo-700 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded px-2"
-          aria-label="Refresh story list"
-        >
-          🔄 Refresh
-        </button>
+    <div className="max-w-[80vw] mx-auto px-4 sm:px-6">
+      <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <h2 className="text-3xl font-bold text-slate-900">
+            Featured Stories ({stories.length})
+          </h2>
+          <button
+            onClick={loadStories}
+            className="btn btn-secondary px-5 py-3 text-base lg:px-7 lg:py-4 lg:text-lg xl:px-8 xl:py-5"
+            aria-label="Refresh story list"
+          >
+            🔄 Refresh
+          </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="region" aria-label="Stories">
+      <div className="grid grid-cols-1 justify-items-center gap-6" role="region" aria-label="Stories">
         {stories.map(story => {
           // Pick a placeholder image based on story id
           const images = {
@@ -108,23 +110,24 @@ export default function StoryList() {
           return (
             <article
               key={story.id}
-              className="bg-gradient-to-br from-white via-purple-50 to-blue-50 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col border-2 border-purple-200 p-6 items-center justify-center text-center group"
+              style={{ maxWidth: STORY_CARD_MAX_WIDTH }}
+              className="w-full bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col border border-slate-200 p-6 items-center justify-center text-center group"
             >
-              <div className="relative flex-shrink-0">
+              <div className="relative w-full flex-shrink-0">
                 <img
                   src={imgUrl}
                   alt="Story cover"
-                  className="rounded-2xl shadow-lg w-28 h-28 object-cover mb-3 mx-auto border-2 border-purple-300 transition-transform duration-300 ease-in-out"
+                  className="rounded-3xl shadow-sm w-full h-56 sm:h-64 object-cover mb-4 mx-auto border border-slate-200 transition-transform duration-300 ease-in-out"
                 />
               </div>
-              <h3 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 w-full mb-1">{story.title}</h3>
-              <p className="text-base text-gray-700 mb-1 w-full font-semibold">
+              <h3 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 mb-1">{story.title}</h3>
+              <p className="text-base text-gray-700 mb-1 font-semibold">
                 by <span className="font-bold text-purple-600">{story.author}</span>
               </p>
               {story.description && (
-                <p className="text-base text-gray-600 mb-2 w-full italic">{story.description}</p>
+                <p className="text-base text-gray-600 mb-2 italic">{story.description}</p>
               )}
-              <div className="flex items-center justify-center text-sm text-gray-600 mb-4 gap-2 w-full font-medium">
+              <div className="flex items-center justify-center text-sm text-gray-600 mb-4 gap-2 font-medium">
                 <span>
                   <span role="img" aria-label="Pages">📄</span> {story.pageCount || 0} pages
                 </span>
@@ -138,7 +141,7 @@ export default function StoryList() {
               </div>
               <button
                 onClick={() => navigate(`/read/${story.id}`)}
-                className="w-full px-8 py-6 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-full text-2xl shadow-lg hover:shadow-2xl hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-purple-400 focus:ring-offset-2 font-black transition-all duration-300 text-center mb-3"
+                className="btn btn-primary text-base mb-3 lg:px-8 lg:py-4 lg:text-lg xl:px-10 xl:py-5"
                 aria-label={`Read story: ${story.title}`}
               >
                 📖 Read
@@ -148,7 +151,7 @@ export default function StoryList() {
                   // TODO: Implement edit functionality
                   alert('Edit coming soon!')
                 }}
-                className="w-full px-8 py-6 bg-gradient-to-r from-gray-300 to-gray-400 text-gray-800 rounded-full text-2xl shadow-lg hover:shadow-2xl hover:from-gray-400 hover:to-gray-500 focus:outline-none focus:ring-4 focus:ring-gray-300 focus:ring-offset-2 font-black transition-all duration-300 text-center"
+                className="btn btn-outline text-base lg:px-8 lg:py-4 lg:text-lg xl:px-10 xl:py-5"
                 aria-label={`Edit story: ${story.title}`}
                 disabled
               >

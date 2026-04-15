@@ -55,10 +55,10 @@ export default function AuthorForm() {
   } = formState
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-8 space-y-6">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">Write Your Story</h2>
-        <p className="text-gray-600">Create an interactive adventure with branching choices</p>
+    <form onSubmit={handleSubmit} className="glass-panel p-10 space-y-8">
+      <div className="mb-4">
+        <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-3">Write Your Story</h2>
+        <p className="text-slate-600">Create an interactive adventure with branching choices.</p>
       </div>
 
       {/* API Error */}
@@ -71,15 +71,15 @@ export default function AuthorForm() {
 
       {/* Success Message */}
       {successMessage && (
-        <div className="p-4 bg-green-50 border-l-4 border-green-400 rounded">
-          <p className="text-green-800 font-medium">✓ {successMessage}</p>
+        <div className="p-4 bg-emerald-500/10 border-l-4 border-emerald-400 rounded">
+          <p className="text-emerald-200 font-medium">✓ {successMessage}</p>
         </div>
       )}
 
       {/* Title Field */}
       <div>
-        <label htmlFor="title" className="block text-sm font-semibold text-gray-700 mb-2">
-          Story Title <span className="text-red-600" aria-label="required">*</span>
+        <label htmlFor="title" className="block text-sm font-semibold text-slate-900 mb-2">
+          Story Title <span className="text-pink-400" aria-label="required">*</span>
         </label>
         <input
           type="text"
@@ -91,8 +91,8 @@ export default function AuthorForm() {
           placeholder="e.g., The Mysterious Island"
           required
           maxLength="100"
-          className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition ${
-            touched.title && errors.title ? 'border-red-500 bg-red-50' : 'border-gray-300'
+          className={`w-full px-4 py-3 border rounded-2xl bg-slate-50 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition ${
+            touched.title && errors.title ? 'border-red-500 bg-red-50/20' : 'border-slate-300'
           }`}
           aria-invalid={touched.title && errors.title ? 'true' : 'false'}
           aria-describedby={touched.title && errors.title ? 'title-error' : undefined}
@@ -104,8 +104,8 @@ export default function AuthorForm() {
 
       {/* Author Field */}
       <div>
-        <label htmlFor="author" className="block text-sm font-semibold text-gray-700 mb-2">
-          Author Name <span className="text-red-600" aria-label="required">*</span>
+        <label htmlFor="author" className="block text-sm font-semibold text-slate-900 mb-2">
+          Author Name <span className="text-pink-400" aria-label="required">*</span>
         </label>
         <input
           type="text"
@@ -117,8 +117,8 @@ export default function AuthorForm() {
           placeholder="Your name"
           required
           maxLength="50"
-          className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition ${
-            touched.author && errors.author ? 'border-red-500 bg-red-50' : 'border-gray-300'
+          className={`w-full px-4 py-3 border rounded-2xl bg-slate-50 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition ${
+            touched.author && errors.author ? 'border-red-500 bg-red-50/20' : 'border-slate-300'
           }`}
           aria-invalid={touched.author && errors.author ? 'true' : 'false'}
           aria-describedby={touched.author && errors.author ? 'author-error' : undefined}
@@ -130,8 +130,8 @@ export default function AuthorForm() {
 
       {/* Content Field */}
       <div>
-        <label htmlFor="content" className="block text-sm font-semibold text-gray-700 mb-2">
-          Story Content <span className="text-red-600" aria-label="required">*</span>
+        <label htmlFor="content" className="block text-sm font-semibold text-slate-900 mb-2">
+          Story Content <span className="text-pink-400" aria-label="required">*</span>
         </label>
         <textarea
           id="content"
@@ -143,13 +143,13 @@ export default function AuthorForm() {
           required
           rows="12"
           maxLength="5000"
-          className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition font-mono text-sm ${
-            touched.content && errors.content ? 'border-red-500 bg-red-50' : 'border-gray-300'
+          className={`w-full px-4 py-3 border rounded-2xl bg-slate-50 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition font-mono text-sm ${
+            touched.content && errors.content ? 'border-red-500 bg-red-50/20' : 'border-slate-700'
           }`}
           aria-invalid={touched.content && errors.content ? 'true' : 'false'}
           aria-describedby={touched.content && errors.content ? 'content-error' : undefined}
         />
-        <div className="mt-2 flex justify-between text-xs text-gray-500">
+        <div className="mt-2 flex justify-between text-xs text-slate-500">
           <span>{values.content.length} / 5000 characters</span>
           {touched.content && errors.content && (
             <span id="content-error" className="text-red-600">✕ {errors.content}</span>
@@ -158,11 +158,11 @@ export default function AuthorForm() {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex gap-3 pt-4">
+      <div className="flex flex-col md:flex-row gap-3 pt-4">
         <button
           type="submit"
           disabled={isSubmitting}
-          className="flex-1 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition disabled:opacity-50 disabled:cursor-not-allowed"
+          className="btn btn-primary flex-1 px-6 py-3 lg:px-8 lg:py-4 lg:text-lg xl:px-10 xl:py-5"
           aria-busy={isSubmitting}
         >
           {isSubmitting ? '✓ Creating Story...' : '✎ Create Story'}
@@ -174,7 +174,7 @@ export default function AuthorForm() {
             setApiError(null)
             setSuccessMessage(null)
           }}
-          className="px-6 py-3 bg-gray-200 text-gray-800 font-semibold rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition"
+          className="btn btn-outline px-6 py-3 lg:px-8 lg:py-4 lg:text-lg xl:px-10 xl:py-5"
           aria-label="Clear form"
         >
           Clear
@@ -182,9 +182,9 @@ export default function AuthorForm() {
       </div>
 
       {/* Tips Section */}
-      <div className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200" role="complementary">
-        <h3 className="font-semibold text-blue-900 mb-3">💡 Writing Tips:</h3>
-        <ul className="text-sm text-blue-800 space-y-2">
+      <div className="mt-8 p-4 rounded-3xl border border-slate-700 bg-slate-900/80" role="complementary">
+        <h3 className="font-semibold text-white mb-3">💡 Writing Tips:</h3>
+        <ul className="text-sm text-slate-300 space-y-2">
           <li className="flex items-start gap-2">
             <span className="flex-shrink-0">•</span>
             <span>Make your opening engaging to hook readers immediately</span>
