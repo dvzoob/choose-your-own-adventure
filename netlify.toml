@@ -7,7 +7,7 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20.19.0"
 
 # Redirect all backend requests to functions
 [[redirects]]
